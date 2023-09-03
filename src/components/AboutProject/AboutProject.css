@@ -1,0 +1,198 @@
+.about-project {
+  color: rgba(255, 255, 255, 1);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 110px 70px;
+}
+
+.about-project__container {
+  display: flex;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 1);
+}
+
+.about-project__title {
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 0;
+  border-bottom: 1px solid #dadada;
+  padding-bottom: 23px;
+  color: rgba(255, 255, 255, 1);
+}
+
+.about-project__items {
+  color: rgba(255, 255, 255, 1);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+}
+
+.about-project__subtitle {
+  color: rgba(255, 255, 255, 1);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 0;
+  padding-bottom: 26px;
+}
+
+.about-project__text {
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+}
+
+.about-project__steps {
+  display: grid;
+  grid-template-columns: 228px 1fr;
+  row-gap: 14px;
+  max-width: 1140px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 110px;
+}
+
+.about-project__step-week {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  max-height: 36px;
+  flex-shrink: 0;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  background: rgba(48, 48, 48, 1);
+}
+
+.about-project__step-week:first-child {
+  background: rgba(61, 220, 132, 1);
+  color: rgba(0, 0, 0, 1);
+}
+
+.about-project__step-name {
+  color: rgba(139, 139, 139, 1);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  margin: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .about-project__steps {
+    max-width: 884px;
+  }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 767px) {
+  .about-project__items {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 767px) {
+  .about-project__subtitle {
+    letter-spacing: -0.8px;
+    padding-bottom: 22px;
+  }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 767px) {
+  .about-project__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .about-project__steps {
+    grid-template-columns: 140px 1fr;
+    padding-top: 93px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .about-project {
+    height: 641px;
+    padding: 70px 18px 69px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .about-project__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+}
+
+@media screen and (max-width: 600px) and (min-width: 320px) {
+  .about-project__items {
+    grid-template-columns: auto;
+    gap: 56px;
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .about-project__subtitle {
+    font-size: 18px;
+    padding-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .about-project__text {
+    font-size: 11px;
+    line-height: 16px;
+    white-space: break-spaces;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .about-project__steps {
+    grid-template-columns: 100px 1fr;
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .about-project__step-week {
+    font-size: 11px;
+    padding: 11px 10px;
+    max-height: 35px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .about-project__step-name {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}

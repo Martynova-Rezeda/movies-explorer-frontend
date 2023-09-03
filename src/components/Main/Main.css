@@ -1,0 +1,7 @@
+.main__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: rgba(32, 32, 32, 1);
+  color: #ffffff;
+}

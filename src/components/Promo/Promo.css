@@ -1,0 +1,78 @@
+.promo {
+  width: 100%;
+  height: 513px;
+  box-sizing: border-box;
+  background: rgba(32, 32, 32, 1);
+  color: #fff;
+  padding: 20px 40px 0px;
+}
+
+.promo__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: rgba(39, 39, 39, 1);
+  border-radius: 10px;
+}
+
+.promo__title {
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  text-align: center;
+  max-width: 730px;
+  margin: 0;
+  padding-top: 160px;
+}
+
+@media screen and (max-width: 1023px) and (min-width: 767px) {
+  .promo {
+    height: 854px;
+    padding: 20px 20px 0;
+  }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 767px) {
+  .promo__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 767px) {
+  .promo__title {
+    font-feature-settings: "clig" off, "liga" off;
+    font-size: 40px;
+    line-height: 52px;
+    margin-top: 0;
+    white-space: normal;
+    padding-top: 350px;
+    max-width: 680px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .promo {
+    height: 600px;
+    padding: 14px 14px 17px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .promo__container {
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .promo__title {
+    text-align: center;
+    font-size: 30px;
+    line-height: 38px;
+    padding-top: 220px;
+  }
+}
