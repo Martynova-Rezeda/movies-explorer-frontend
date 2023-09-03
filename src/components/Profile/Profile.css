@@ -126,6 +126,22 @@
 
 @media screen and (max-width: 767px) and (min-width: 320px) {
   .profile__button {
-    padding-top: 362px;
+    padding-top: 346px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .profile__header {
+    padding-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .profile__logout-link {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
   }
 }

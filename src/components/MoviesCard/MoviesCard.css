@@ -38,7 +38,7 @@
 
 .movies-list__saved {
   position: absolute;
-  background-image: url("../../images/save3d.png");
+  background-image: url("../../images/save3d.svg");
   background-repeat: no-repeat;
   background-color: transparent;
   top: 14px;
@@ -97,6 +97,7 @@
 .movies-list__delete:hover {
   display: block;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .movies-list__element-picture:hover + .movies-list__delete {

@@ -30,8 +30,12 @@
   font-weight: 400;
   line-height: 50px;
   letter-spacing: -1.2px;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid #424242;
   padding-bottom: 19px;
+}
+
+.portfolio__item:last-child {
+  border: none;
 }
 
 .portfolio__item-link {

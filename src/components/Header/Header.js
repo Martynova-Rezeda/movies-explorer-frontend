@@ -1,5 +1,5 @@
 import React from "react";
-import logoPath from "../../images/logo.png";
+import logoPath from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import HeaderMenuMovies from "../HeaderMenuMovies/HeaderMenuMovies";
@@ -23,7 +23,7 @@ function Header({ auth }) {
     <header className="header">
       <div className="header__container">
         <Link to="/">
-          <img src={logoPath} alt="Логотип сайта" className="header__logo" />
+          <img src={logoPath} alt="Логотип сайта" className="logo" />
         </Link>
         {auth && <HeaderMenuMovies onClick={handleOpenMenu} />}
         {!auth ? (

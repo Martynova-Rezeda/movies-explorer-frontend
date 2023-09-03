@@ -31,6 +31,10 @@
   box-shadow: 0 0 0 0.2rem rgba(66, 133, 244, 1);
 }
 
+.search-form-title {
+  display: none;
+}
+
 .search-form__movie-field::placeholder {
   font-size: 14px;
   font-weight: 400;

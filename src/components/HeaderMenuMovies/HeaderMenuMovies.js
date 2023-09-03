@@ -4,27 +4,29 @@ import "./HeaderMenuMovies.css";
 
 function HeaderMenuMovies() {
   return (
-    <nav className="header__movies-menu">
-      <NavLink
-        to="/movies"
-        className={({ isActive }) =>
-          isActive
-            ? "header__movies-menu-link_active"
-            : "link header__movies-menu-link"
-        }
-      >
-        Фильмы
-      </NavLink>
-      <NavLink
-        to="/saved-movies"
-        className={({ isActive }) =>
-          isActive
-            ? "header__movies-menu-link_active"
-            : "link header__movies-menu-link"
-        }
-      >
-        Сохраненные фильмы
-      </NavLink>
+    <nav className="navigation">
+      <div className="navigation__link">
+        <NavLink
+          to="/movies"
+          className={({ isActive }) =>
+            isActive
+              ? "navigation__link-item-active"
+              : "link navigation__link-item"
+          }
+        >
+          Фильмы
+        </NavLink>
+        <NavLink
+          to="/saved-movies"
+          className={({ isActive }) =>
+            isActive
+              ? "navigation__link-item-active"
+              : "link navigation__link-item"
+          }
+        >
+          Сохраненные фильмы
+        </NavLink>
+      </div>
     </nav>
   );
 }

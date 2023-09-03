@@ -21,7 +21,7 @@ function BurgerMenu({ isOpen, onClick }) {
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? "burger__item-link_active"
+                    ? "burger__item-link-active"
                     : "link burger__item-link"
                 }
               >
@@ -33,7 +33,7 @@ function BurgerMenu({ isOpen, onClick }) {
                 to="/movies"
                 className={({ isActive }) =>
                   isActive
-                    ? "burger__item-link_active"
+                    ? "burger__item-link-active"
                     : "link burger__item-link"
                 }
               >
@@ -45,7 +45,7 @@ function BurgerMenu({ isOpen, onClick }) {
                 to="/saved-movies"
                 className={({ isActive }) =>
                   isActive
-                    ? "burger__item-link_active"
+                    ? "burger__item-link-active"
                     : "link burger__item-link"
                 }
               >

@@ -28,6 +28,11 @@
   width: 44px;
   height: 44px;
 }
+.header__menu-burger-btn:hover {
+  opacity: 0.3;
+  transition: 0.3s;
+  cursor: pointer;
+}
 
 @media screen and (max-width: 2560px) and (min-width: 850px) {
   .header__menu-burger-btn {

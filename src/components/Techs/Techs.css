@@ -73,25 +73,25 @@
   padding-bottom: 22px;
 }
 
-@media screen and (max-width: 1023px) and (min-width: 768px) {
+@media screen and (max-width: 1023px) and (min-width: 700px) {
   .about-techs {
     padding: 90px 50px;
   }
 }
 
-@media screen and (max-width: 1023px) and (min-width: 768px) {
+@media screen and (max-width: 1023px) and (min-width: 700px) {
   .about-techs__container {
     padding-top: 80px;
   }
 }
 
-@media screen and (max-width: 1023px) and (min-width: 767px) {
+@media screen and (max-width: 1023px) and (min-width: 700px) {
   .about-techs__subtitle {
     padding-bottom: 22px;
   }
 }
 
-@media screen and (max-width: 1023px) and (min-width: 767px) {
+@media screen and (max-width: 1023px) and (min-width: 700px) {
   .about-techs__text {
     font-size: 12px;
     line-height: 18px;
@@ -100,32 +100,32 @@
   }
 }
 
-@media screen and (max-width: 1023px) and (min-width: 767px) {
+@media screen and (max-width: 1023px) and (min-width: 700px) {
   .about-techs__items {
     grid-template-columns: repeat(7, 84px);
   }
 }
 
-@media screen and (max-width: 1023px) and (min-width: 767px) {
+@media screen and (max-width: 1023px) and (min-width: 700px) {
   .about-techs__item {
     max-width: 84px;
     max-height: 57px;
   }
 }
 
-@media screen and (max-width: 750px) and (min-width: 320px) {
+@media screen and (max-width: 700px) and (min-width: 320px) {
   .about-techs {
     padding: 70px 18px;
   }
 }
 
-@media screen and (max-width: 750px) and (min-width: 320px) {
+@media screen and (max-width: 700px) and (min-width: 320px) {
   .about-techs__container {
     padding-top: 60px;
   }
 }
 
-@media screen and (max-width: 750px) and (min-width: 320px) {
+@media screen and (max-width: 700px) and (min-width: 320px) {
   .about-techs__subtitle {
     font-size: 30px;
     font-style: normal;
@@ -135,7 +135,7 @@
   }
 }
 
-@media screen and (max-width: 750px) and (min-width: 320px) {
+@media screen and (max-width: 700px) and (min-width: 320px) {
   .about-techs__text {
     font-size: 11px;
     line-height: 16px;
@@ -144,13 +144,13 @@
   }
 }
 
-@media screen and (max-width: 750px) and (min-width: 320px) {
+@media screen and (max-width: 700px) and (min-width: 320px) {
   .about-techs__items {
     grid-template-columns: repeat(2, 84px);
   }
 }
 
-@media screen and (max-width: 750px) and (min-width: 320px) {
+@media screen and (max-width: 700px) and (min-width: 320px) {
   .about-techs__item {
     font-size: 12px;
     letter-spacing: -0.48px;
@@ -158,7 +158,7 @@
   }
 }
 
-@media screen and (max-width: 767px) and (min-width: 320px) {
+@media screen and (max-width: 700px) and (min-width: 320px) {
   .about-techs__title {
     font-size: 18px;
     line-height: 22px;

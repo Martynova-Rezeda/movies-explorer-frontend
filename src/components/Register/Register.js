@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logoPath from "../../images/logo.png";
+import logoPath from "../../images/logo.svg";
 import "./Register.css";
 
 const Register = () => {
@@ -19,7 +19,7 @@ const Register = () => {
     <>
       <div className="register">
         <a href="/" className="link">
-          <img src={logoPath} alt="Логотип сайта" className="register__logo" />
+          <img src={logoPath} alt="Логотип сайта" className="logo" />
         </a>
         <form className="register__form">
           <h1 className="register__header">Добро пожаловать!</h1>

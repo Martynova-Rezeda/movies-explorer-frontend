@@ -1,4 +1,4 @@
-.header__movies-menu {
+.navigation {
   display: flex;
   justify-content: center;
   gap: 16px;
@@ -7,7 +7,12 @@
   padding-left: 426px;
 }
 
-.header__movies-menu-link {
+.navigation__link {
+  display: flex;
+  gap: 16px;
+}
+
+.navigation__link-item {
   color: #ffffff;
   font-size: 13px;
   font-weight: 500;
@@ -17,7 +22,7 @@
   white-space: nowrap;
 }
 
-.header__movies-menu-link_active {
+.navigation__link-item-active {
   border-bottom: 2px solid #ffffff;
   color: #ffffff;
   font-size: 14px;
@@ -31,7 +36,7 @@
 }
 
 @media screen and (max-width: 1246px) and (min-width: 850px) {
-  .header__movies-menu {
+  .navigation {
     width: 750px;
     padding-left: 150px;
     padding-right: 150px;
@@ -39,7 +44,7 @@
 }
 
 @media screen and (max-width: 850px) and (min-width: 320px) {
-  .header__movies-menu {
+  .navigation {
     display: none;
   }
 }

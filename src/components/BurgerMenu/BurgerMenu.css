@@ -45,6 +45,12 @@
   right: 22px;
 }
 
+.burger__close-icon:hover {
+  cursor: pointer;
+  opacity: 0.3;
+  transition: 0.3s;
+}
+
 .burger__items {
   padding: 0;
   padding-bottom: 90px;
@@ -79,7 +85,7 @@
   display: block;
 }
 
-.burger__item-link_active {
+.burger__item-link-active {
   border-bottom: 2px solid #ffffff;
   padding-bottom: 4px;
   text-decoration: none;

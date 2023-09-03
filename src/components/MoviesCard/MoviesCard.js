@@ -1,9 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./MoviesCard.css";
-import MovieImage from "../../images/pic__COLOR_pic.png";
-//import onButton from "../../images/save3.svg";
-//import offButton from "../../images/save3d.png";
+import MovieImage from "../../images/pic__COLOR_pic.jpg";
 
 function MoviesCard({ icon }) {
   const [savedMovie, setSavedMovie] = useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import logoPath from "../../images/logo.png";
+import logoPath from "../../images/logo.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
@@ -19,7 +19,7 @@ const Login = () => {
     <>
       <div className="login">
         <a href="/" className="link">
-          <img src={logoPath} alt="Логотип сайта" className="register__logo" />
+          <img src={logoPath} alt="Логотип сайта" className="logo" />
         </a>
         <form className="login__form">
           <h1 className="login__header">Рады видеть!</h1>
