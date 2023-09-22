@@ -1,17 +1,47 @@
 import React from "react";
 import "./SearchForm.css";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import loupePath from "../../images/find-3.svg";
+import useInput from "../../hooks/useInput";
 
-function SearchForm() {
+function SearchForm({
+  onSubmit,
+  isChecked,
+  onInputSearchError,
+  initialName = " ",
+  handleInputChecked,
+}) {
+  console.log(initialName);
+  const searchInput = useInput({});
+  const location = useLocation();
+
+  useEffect(() => {
+    searchInput.setValue(initialName);
+  }, []);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    if (location.pathname === "/movies")
+      localStorage.setItem("name", searchInput.value);
+
+    searchInput.value !== " "
+      ? onSubmit(searchInput.value)
+      : onInputSearchError();
+  };
+
   return (
     <section className="search-form">
       <h2 className="search-form-title">Заголовок</h2>
-      <form className="search-form__movie">
+      <form className="search-form__movie" onSubmit={handleSubmit} noValidate>
         <input
           className="search-form__movie-field"
           name="name"
           type="text"
           placeholder="Фильм"
+          defaultValue={initialName}
+          required
+          onChange={searchInput.onChange}
         />
         <button className="search-form__movie-button" type="submit">
           <img
@@ -25,6 +55,8 @@ function SearchForm() {
             className="search-form__toggle-checkbox"
             type="checkbox"
             id="switch"
+            checked={isChecked}
+            onChange={handleInputChecked}
           />
           <span className="search-form__toggle-switch"></span>
           <span className="search-form__movie-toggle-name">

@@ -1,0 +1,63 @@
+.complete {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 0;
+  min-height: 1000px;
+}
+
+.complete__header {
+  margin: 0 442px 40px;
+  max-width: 410px;
+  padding: 0 358px 0 0;
+}
+
+.complete__form {
+  align-content: start;
+  display: grid;
+  grid-template-areas:
+    "auth-title"
+    "auth-inputs"
+    "."
+    "auth-submit";
+  grid-template-rows: repeat(2, auto) 1fr auto;
+  min-height: calc(100vh - 144px);
+  padding: 0 30px;
+  min-height: 553px;
+  padding: 0;
+  width: 410px;
+}
+
+.complete__form_type_profile {
+  min-height: calc(100vh - 74px);
+}
+
+@media screen and (max-width: 900px) and (min-width: 767px) {
+  .complete {
+    min-height: 876px;
+    padding-top: 232px;
+    padding-bottom: 232px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .complete__form {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+  }
+}
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .complete {
+    min-height: 706px;
+    padding-top: 56px;
+    padding-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .complete__header {
+    padding: 0 141px 50px;
+  }
+}

@@ -1,16 +1,10 @@
 import React from "react";
 import "./MoviesCardList.css";
-import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({ icon }) {
+function MoviesCardList({ children }) {
   return (
     <section className="movies-list">
-      <div className="movies-list__elements">
-        <MoviesCard icon={icon} />
-      </div>
-      <button type="submit" className="link movies-list__elements-more">
-        Еще
-      </button>
+      <div className="movies-list__elements">{children}</div>
     </section>
   );
 }

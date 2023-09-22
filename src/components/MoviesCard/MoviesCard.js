@@ -1,233 +1,80 @@
-import React from "react";
-import { useState } from "react";
+import React, { useContext } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
-import MovieImage from "../../images/pic__COLOR_pic.jpg";
+import { BASE_IMAGE_URL } from "../../utils/constants";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 
-function MoviesCard({ icon }) {
-  const [savedMovie, setSavedMovie] = useState(false);
+function MoviesCard({ movie, saveMovies, likeMovies, disLikeMovies }) {
+  const location = useLocation();
+  const currentUser = useContext(CurrentUserContext);
+  const name = movie.nameRU;
+  const duration = movie.duration;
+  const urlImage =
+    location.pathname === "/movies"
+      ? `${BASE_IMAGE_URL}${movie.image.url}`
+      : movie.image;
+  const trailerLink = movie.trailerLink;
 
-  function handleSavedMovie() {
-    if (!savedMovie && icon === "saved") {
-      return setSavedMovie(true);
+  const [isLikeMovie, setIsLikeMovie] = useState(false);
+
+  const cardLikeBtnClassName = `movies-list__saved ${
+    isLikeMovie ? "movies-list__saved_active" : ""
+  }`;
+
+  useEffect(() => {
+    if (location.pathname === "/movies") {
+      const isOwner = saveMovies.some(
+        (saveMovie) =>
+          saveMovie.movieId === movie.id && saveMovie.owner === currentUser._id
+      );
+      setIsLikeMovie(isOwner);
     }
-    return setSavedMovie(false);
-  }
+  }, []);
+
+  const handlelikeBtn = () => {
+    if (location.pathname === "/movies") {
+      isLikeMovie
+        ? disLikeMovies(saveMovies.find((item) => item.movieId === movie.id))
+        : likeMovies(movie);
+    } else {
+      disLikeMovies(movie);
+    }
+    setIsLikeMovie((state) => !state);
+  };
+
   return (
     <>
       <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
+        <a
+          href={trailerLink}
+          className="movies-list__element-tailerLink"
+          target="_blanck"
+        >
+          <img
+            src={urlImage}
+            alt="Обложка фильма"
+            className="movies-list__element-picture"
+          />
+        </a>
+        {location.pathname === "/movies" ? (
+          <button
+            className={cardLikeBtnClassName}
+            type="button"
+            onClick={handlelikeBtn}
+          ></button>
+        ) : (
+          <button
+            className="movies-list__delete"
+            type="button"
+            onClick={handlelikeBtn}
+          ></button>
+        )}
         <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
-        </div>
-      </div>
-      <div className="movies-list__element">
-        <img
-          src={MovieImage}
-          alt="Обложка фильма"
-          className="movies-list__element-picture"
-        />
-        <button
-          type="submit"
-          onClick={handleSavedMovie}
-          className={`movies-list__${icon} movies-list__${icon}_${
-            savedMovie ? "active" : ""
-          }`}
-        ></button>
-        <div className="movies-list__element-info">
-          <h2 className="movies-list__element-title">33 слова о дизайне</h2>
-          <p className="movies-list__element-duration">1ч 47м</p>
+          <h2 className="movies-list__element-title">{name}</h2>
+          <p className="movies-list__element-duration">
+            {(duration / 60) | 0}ч {duration % 60}м
+          </p>
         </div>
       </div>
     </>

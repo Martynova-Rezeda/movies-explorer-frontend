@@ -8,7 +8,7 @@ import HeaderProfile from "../HeaderProfile/HeaderProfile";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import "./Header.css";
 
-function Header({ auth }) {
+function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleOpenMenu() {
@@ -25,13 +25,13 @@ function Header({ auth }) {
         <Link to="/">
           <img src={logoPath} alt="Логотип сайта" className="logo" />
         </Link>
-        {auth && <HeaderMenuMovies onClick={handleOpenMenu} />}
-        {!auth ? (
+        {isLoggedIn && <HeaderMenuMovies onClick={handleOpenMenu} />}
+        {!isLoggedIn ? (
           <HeaderRegistration />
         ) : (
           <HeaderProfile isOpen={handleOpenMenu} />
         )}
-        {auth && <BurgerMenu isOpen={isOpen} onClick={handleCloseMenu} />}
+        {isLoggedIn && <BurgerMenu isOpen={isOpen} onClick={handleCloseMenu} />}
       </div>
     </header>
   );

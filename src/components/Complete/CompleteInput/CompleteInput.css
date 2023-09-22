@@ -1,0 +1,116 @@
+.complete__inputs {
+  display: grid;
+  grid-area: auth-inputs;
+  padding-bottom: 30px;
+}
+
+.complete__input-container {
+  box-sizing: border-box;
+  color: #ffffff;
+  display: grid;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.18;
+  position: relative;
+}
+
+.complete__label {
+  color: #8b8b8b;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.complete__label_type_profile {
+  color: #ffffff;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  left: 0;
+  line-height: 13.31px;
+  margin: 0;
+  position: absolute;
+  top: 0;
+}
+
+.complete__input {
+  max-width: 396px;
+  min-height: 46px;
+  color: #ffffff;
+  background-color: #2f2f2f;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.complete__input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(66, 133, 244, 1);
+}
+
+.complete__input::placeholder {
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0px;
+  text-align: right;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.complete__input_type_profile {
+  color: #ffffff;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 13.31px;
+  padding: 0 0 16px;
+  text-align: right;
+  background-color: #202020;
+  border-bottom: 1px solid #424242;
+  border-radius: 0;
+  max-width: 410px;
+  min-height: 0;
+}
+
+.complete__input_type_profile:focus {
+  border-bottom: 1px solid rgba(66, 133, 244, 1);
+}
+
+.complete__input-container_type_profile:last-child .complete__input {
+  border: none;
+}
+
+.complete__input_type_profile::placeholder {
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0px;
+  text-align: right;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.complete__input-error {
+  box-sizing: border-box;
+  color: #ee3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
+  min-height: 18px;
+  padding-top: 10px;
+  max-width: 396px;
+}
+
+.complete__input-error_type_profile {
+  text-align: right;
+}

@@ -5,10 +5,10 @@ import "./HeaderRegistration.css";
 function HeaderRegistration() {
   return (
     <nav className="header__menu">
-      <Link to="/sign-up" className="link header__menu-link">
+      <Link to="/signup" className="link header__menu-link">
         Регистрация
       </Link>
-      <Link to="/sign-in" className="link header__menu-button">
+      <Link to="/signin" className="link header__menu-button">
         Вход
       </Link>
     </nav>
