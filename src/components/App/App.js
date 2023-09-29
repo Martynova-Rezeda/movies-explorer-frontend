@@ -166,6 +166,7 @@ function App() {
       .catch((res) => {
         res.then((error) => {
           if (error.statusCode === 400) {
+            console.log(error.message);
             setErrorMessage("При регистрации пользователя произошла ошибка.");
           } else {
             setErrorMessage(error.message);
