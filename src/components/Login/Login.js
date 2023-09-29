@@ -8,7 +8,7 @@ import CompleteInput from "../Complete/CompleteInput/CompleteInput";
 import CompleteButton from "../Complete/CompleteButton/CompleteButton";
 import "../Complete/Complete.css";
 
-const Login = ({ onLoginSubmit, isLoading, errorSubmitApi }) => {
+const Login = ({ onLoginSubmit, isLoading, errorMessage }) => {
   const form = useFormWithValidation();
 
   const handleSubmit = (evt) => {
@@ -56,7 +56,7 @@ const Login = ({ onLoginSubmit, isLoading, errorSubmitApi }) => {
             textPreLink="Ещё не зарегистрированы?"
             textLink="Регистрация"
             isValid={form.isValid && !isLoading}
-            textInfoSubmit={errorSubmitApi}
+            textInfoSubmit={errorMessage}
             urlLinkSubmit="/signup"
           />
         </form>

@@ -42,7 +42,7 @@ function SavedMovies({ movies, onInputSearchError, isLoading, disLikeMovies }) {
           movies={foundMovies}
           isLoading={isLoading}
           isChecked={isChecked}
-          dislikeMovies={disLikeMovies}
+          disLikeMovies={disLikeMovies}
         />
       </MoviesCardList>
       <Footer />

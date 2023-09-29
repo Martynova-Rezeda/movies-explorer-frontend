@@ -24,7 +24,7 @@ const CompleteInput = ({
     isProfile ? " complete__input_type_profile" : ""
   } ${errors[name] ? "complete__input_type_error" : ""}`;
   const classInputError = `complete__input-error ${
-    isProfile ? " complete__input-error_type_profile" : ""
+    isProfile ? "complete__input-error_type_profile" : ""
   }`;
   return (
     <div className={classContainer}>

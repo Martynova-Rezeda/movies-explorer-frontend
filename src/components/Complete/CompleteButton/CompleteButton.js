@@ -12,6 +12,7 @@ const CompleteButton = ({
   urlLinkSubmit,
   onSignOut,
 }) => {
+  console.log({ textInfoSubmit });
   const classContainer = `complete__button-container ${
     isProfile ? "complete__button-container_type_profile" : ""
   }`;

@@ -6,13 +6,6 @@ const REGEX_EMAIL =
   "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" +
   "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 
-const MESSAGE = {
-  notFound: "Ничего не найдено",
-  serverError:
-    "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
-  badRequestError: "При регистрации пользователя произошла ошибка.",
-};
-
 const DEVICE_PARAMS = {
   desktop: {
     maxMovies: 12,
@@ -33,11 +26,4 @@ const DEVICE_PARAMS = {
   },
 };
 
-export {
-  BASE_MOVIE_URL,
-  BASE_URL,
-  BASE_IMAGE_URL,
-  MESSAGE,
-  REGEX_EMAIL,
-  DEVICE_PARAMS,
-};
+export { BASE_MOVIE_URL, BASE_URL, BASE_IMAGE_URL, REGEX_EMAIL, DEVICE_PARAMS };

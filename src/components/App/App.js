@@ -10,7 +10,6 @@ import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import InfoTooltip from "../InfoTooltip/Infotooltip";
-//import { MESSAGE } from "../../utils/constants";
 import { moviesApi } from "../../utils/MoviesApi";
 import { mainApi } from "../../utils/MainApi";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
@@ -37,19 +36,16 @@ function App() {
   const [infoTooltipProps, setInfoTooltipProps] = useState({
     message: "",
     isError: false,
-    buttonText: "",
-    onSubmit: () => {},
   });
 
   const [isTokenChecked, setIsTokenChecked] = useState(false);
-  const [errorSubmitApi, setErrorSubmitApi] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const routesLogined = ["/signin", "/signup"];
-  //1.2
+
   useEffect(() => {
     if (isTokenChecked && currentUser.isLoggedIn) {
       routesLogined.includes(location.pathname) &&
         navigate("/movies", { replace: true });
-
       getMovies();
       getSavedMovies();
     }
@@ -72,7 +68,7 @@ function App() {
       .then((dataMovies) => {
         setMovies([...filterMovies(dataMovies, name)]);
       })
-      .catch(() => errorGetMoviesPopupOpen())
+      .catch(() => errorMoviesPopupOpen())
       .finally(() => {
         setIsLoading(false);
       });
@@ -85,8 +81,8 @@ function App() {
         setSaveMovies([...filterMovies(data, name)]);
       })
       .catch((res) => {
-        res.then((err) => {
-          console.log(err.message);
+        res.then((error) => {
+          console.log(error.message);
         });
       });
   };
@@ -96,8 +92,8 @@ function App() {
     return mainApi
       .addMovies({ ...movie })
       .then(() => getSavedMovies())
-      .catch((err) => {
-        console.log(`Error:${err}`);
+      .catch((error) => {
+        console.log(`Error:${error}`);
       });
   };
 
@@ -106,8 +102,8 @@ function App() {
     return mainApi
       .deleteMovies(movie)
       .then(() => getSavedMovies())
-      .catch((err) => {
-        console.log(`Error:${err}`);
+      .catch((error) => {
+        console.log(`Error:${error}`);
       });
   };
 
@@ -118,9 +114,9 @@ function App() {
       .then((user) => {
         setCurrentUser({ ...user, isLoggedIn: true });
       })
-      .catch((err) => {
+      .catch((error) => {
         handleLogOutSubmit();
-        console.log(err.message);
+        console.log(error.message);
       });
   };
   //Обновляем данные пользователя
@@ -132,16 +128,13 @@ function App() {
         setInfoTooltipProps({
           ...infoTooltipProps,
           message: "Данные успешно обновлены.",
-          buttonText: "OK",
           isError: false,
-          onSubmit: closePopup,
         });
         infoTooltipOpen();
       })
       .catch((res) => {
-        res.then((err) => {
-          console.log(err.message);
-          setErrorSubmitApi(err.message);
+        res.then((error) => {
+          setErrorMessage(error.message);
         });
       });
   };
@@ -157,8 +150,8 @@ function App() {
         navigate("/movies", { replace: true });
       })
       .catch((res) => {
-        res.then((err) => {
-          setErrorSubmitApi(err.message);
+        res.then((error) => {
+          setErrorMessage(error.message);
         });
       });
   };
@@ -171,11 +164,12 @@ function App() {
         handleLoginSubmit({ email, password });
       })
       .catch((res) => {
-        res.then((err) => {
-          if (err.statusCode === 400) {
-            setErrorSubmitApi("При регистрации пользователя произошла ошибка.");
+        res.then((error) => {
+          if (error.statusCode === 400) {
+            setErrorMessage("При регистрации пользователя произошла ошибка.");
           } else {
-            setErrorSubmitApi(err.message);
+            setErrorMessage(error.message);
+            console.log(error.message);
           }
         });
       });
@@ -202,41 +196,41 @@ function App() {
           });
         }
       })
-      .catch((err) => {
+      .catch((error) => {
         handleLogOutSubmit();
-        console.log(err);
+        console.log(error);
       })
       .finally(() => setIsTokenChecked(true));
   };
 
+  //Oткрытиe попапа оповещения
   const infoTooltipOpen = () => {
     setIsInfoTooltipOpen(true);
   };
+
+  //Закрытие попапа оповещения
   const closePopup = () => {
     setIsInfoTooltipOpen(false);
   };
 
+  //Попап поиска фильмов
   const onInputSearchError = () => {
     setInfoTooltipProps({
       ...infoTooltipProps,
       message: "Нужно ввести ключевое слово",
-      buttonText: "OK",
       isError: true,
-      onSubmit: closePopup,
     });
     infoTooltipOpen();
   };
 
-  const errorGetMoviesPopupOpen = () => {
+  const errorMoviesPopupOpen = () => {
     setInfoTooltipProps({
       ...infoTooltipProps,
       message:
         "Во время запроса произошла ошибка. " +
         "Возможно, проблема с соединением или сервер недоступен. " +
         "Подождите немного и попробуйте ещё раз",
-      buttonText: "OK",
       isError: true,
-      onSubmit: closePopup,
     });
     infoTooltipOpen();
   };
@@ -280,11 +274,21 @@ function App() {
           />
           <Route
             path="/signup"
-            element={<Register onRegistationSubmit={handleRegistationSubmit} />}
+            element={
+              <Register
+                onRegistationSubmit={handleRegistationSubmit}
+                errorMessage={errorMessage}
+              />
+            }
           />
           <Route
             path="/signin"
-            element={<Login onLoginSubmit={handleLoginSubmit} />}
+            element={
+              <Login
+                onLoginSubmit={handleLoginSubmit}
+                errorMessage={errorMessage}
+              />
+            }
           />
           <Route
             path="/profile"
@@ -294,7 +298,7 @@ function App() {
                 isLoggedIn={currentUser.isLoggedIn}
                 isTokenChecked={isTokenChecked}
                 onSignOut={handleLogOutSubmit}
-                errorSubmitApi={errorSubmitApi}
+                errorMessage={errorMessage}
                 onUpdateUserProfile={onUpdateUserProfile}
               />
             }
@@ -304,13 +308,10 @@ function App() {
         </Routes>
         <InfoTooltip
           isOpen={isInfoTooltipOpen}
-          isRegistered={true}
           onClose={closePopup}
           name="infoTooltip"
-          buttonText={infoTooltipProps.buttonText}
           isError={infoTooltipProps.isError}
           message={infoTooltipProps.message}
-          onSubmit={infoTooltipProps.onSubmit}
         />
       </div>
     </CurrentUserContext.Provider>

@@ -14,7 +14,7 @@ const Profile = ({
   isLoading,
   onSignOut,
   onUpdateUserProfile,
-  errorSubmitApi,
+  errorMessage,
 }) => {
   const form = useFormWithValidation();
   const [isValid, setIsValid] = useState(false);
@@ -51,7 +51,6 @@ const Profile = ({
           />
           <div className="complete__inputs complete__inputs_type_profile">
             <CompleteInput
-              required
               nameText="Имя"
               minLength={2}
               maxLength={30}
@@ -83,7 +82,7 @@ const Profile = ({
             textLink="Выйти из аккаунта"
             isProfile={true}
             onSignOut={onSignOut}
-            textInfoSubmit={errorSubmitApi}
+            textInfoSubmit={errorMessage}
             isValid={isValid}
             urlLinkSubmit="/signin"
           />

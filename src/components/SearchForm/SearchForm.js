@@ -24,7 +24,6 @@ function SearchForm({
     evt.preventDefault();
     if (location.pathname === "/movies")
       localStorage.setItem("name", searchInput.value);
-
     searchInput.value !== " "
       ? onSubmit(searchInput.value)
       : onInputSearchError();
@@ -39,7 +38,7 @@ function SearchForm({
           name="name"
           type="text"
           placeholder="Фильм"
-          defaultValue={initialName}
+          defaultValue={(initialName = "")}
           required
           onChange={searchInput.onChange}
         />

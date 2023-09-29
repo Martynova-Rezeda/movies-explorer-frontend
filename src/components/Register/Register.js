@@ -6,7 +6,7 @@ import CompleteInput from "../Complete/CompleteInput/CompleteInput";
 import CompleteButton from "../Complete/CompleteButton/CompleteButton";
 import "../Complete/Complete.css";
 
-const Register = ({ onRegistationSubmit, isLoading, errorSubmitApi }) => {
+const Register = ({ onRegistationSubmit, isLoading, errorMessage }) => {
   const form = useFormWithValidation();
 
   const handleSubmit = (evt) => {
@@ -72,7 +72,7 @@ const Register = ({ onRegistationSubmit, isLoading, errorSubmitApi }) => {
             textPreLink="Уже зарегистрированы? "
             textLink="Войти"
             isValid={form.isValid && !isLoading}
-            textInfoSubmit={errorSubmitApi}
+            textInfoSubmit={errorMessage}
             urlLinkSubmit="/signin"
           />
         </form>
