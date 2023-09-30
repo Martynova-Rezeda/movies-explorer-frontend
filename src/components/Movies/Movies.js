@@ -17,7 +17,7 @@ function Movies({
   movies,
   saveMovies,
   onInputSearchError,
-  isLoading,
+  onLoading,
   likeMovies,
   disLikeMovies,
 }) {
@@ -63,12 +63,12 @@ function Movies({
         initialName={initialNameValue()}
         handleInputChecked={handleInputChecked}
       />
-      {isLoading ? <Preloader /> : ""}
+      {onLoading ? <Preloader /> : ""}
       <MoviesCardList>
         <RepresentMovies
           movies={foundMovies}
           saveMovies={saveMovies}
-          isLoading={isLoading}
+          onLoading={onLoading}
           isChecked={isChecked}
           numberMovies={device.numberMovies}
           likeMovies={likeMovies}

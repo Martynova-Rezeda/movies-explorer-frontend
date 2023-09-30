@@ -17,12 +17,15 @@ const CompleteInput = ({
   const classContainer = `complete__input-container ${
     isProfile ? " complete__input-container_type_profile" : ""
   }`;
+
   const classLabel = `complete__label ${
     isProfile ? " complete__label_type_profile" : ""
   }`;
+
   const classInput = `complete__input ${
     isProfile ? " complete__input_type_profile" : ""
   } ${errors[name] ? "complete__input_type_error" : ""}`;
+
   const classInputError = `complete__input-error ${
     isProfile ? "complete__input-error_type_profile" : ""
   }`;

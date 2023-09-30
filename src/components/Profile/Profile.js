@@ -11,7 +11,7 @@ import CompleteInput from "../Complete/CompleteInput/CompleteInput";
 import CompleteButton from "../Complete/CompleteButton/CompleteButton";
 
 const Profile = ({
-  isLoading,
+  onLoading,
   onSignOut,
   onUpdateUserProfile,
   errorMessage,
@@ -28,8 +28,8 @@ const Profile = ({
     const isDisabled =
       form.values.name === currentUser.name &&
       form.values.email === currentUser.email;
-    setIsValid(form.isValid && !isDisabled && !isLoading);
-  }, [form.values, isLoading]);
+    setIsValid(form.isValid && !isDisabled && !onLoading);
+  }, [form.values, onLoading]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -60,7 +60,7 @@ const Profile = ({
               value={currentUser.name}
               errors={form.errors}
               onChange={form.handleChange}
-              isDisabled={isLoading}
+              isDisabled={onLoading}
               isProfile={true}
             />
             <CompleteInput
@@ -70,14 +70,14 @@ const Profile = ({
               type="email"
               onChange={form.handleChange}
               value={currentUser.email}
-              isDisabled={isLoading}
+              isDisabled={onLoading}
               pattern={REGEX_EMAIL}
               errors={form.errors}
               isProfile={true}
             />
           </div>
           <CompleteButton
-            textButton={`${isLoading ? "Сохранение..." : "Редактировать"}`}
+            textButton={onLoading ? "Сохранение..." : "Редактировать"}
             textPreLink=""
             textLink="Выйти из аккаунта"
             isProfile={true}

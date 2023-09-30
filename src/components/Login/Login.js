@@ -8,7 +8,7 @@ import CompleteInput from "../Complete/CompleteInput/CompleteInput";
 import CompleteButton from "../Complete/CompleteButton/CompleteButton";
 import "../Complete/Complete.css";
 
-const Login = ({ onLoginSubmit, isLoading, errorMessage }) => {
+const Login = ({ onLoginSubmit, onLoading, errorMessage }) => {
   const form = useFormWithValidation();
 
   const handleSubmit = (evt) => {
@@ -38,7 +38,7 @@ const Login = ({ onLoginSubmit, isLoading, errorMessage }) => {
               type="email"
               pattern={REGEX_EMAIL}
               errors={form.errors}
-              isDisabled={isLoading}
+              isDisabled={onLoading}
               onChange={form.handleChange}
             />
             <CompleteInput
@@ -47,15 +47,15 @@ const Login = ({ onLoginSubmit, isLoading, errorMessage }) => {
               id="password"
               type="password"
               errors={form.errors}
-              isDisabled={isLoading}
+              isDisabled={onLoading}
               onChange={form.handleChange}
             />
           </div>
           <CompleteButton
-            textButton={`${isLoading ? "Идет авторизация..." : "Войти"}`}
-            textPreLink="Ещё не зарегистрированы?"
-            textLink="Регистрация"
-            isValid={form.isValid && !isLoading}
+            textButton={onLoading ? "Идет авторизация..." : "Войти"}
+            textPreLink="Ещё не зарегистрированы? "
+            textLink=" Регистрация"
+            isValid={form.isValid && !onLoading}
             textInfoSubmit={errorMessage}
             urlLinkSubmit="/signup"
           />

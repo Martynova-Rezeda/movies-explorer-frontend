@@ -12,7 +12,6 @@ const CompleteButton = ({
   urlLinkSubmit,
   onSignOut,
 }) => {
-  console.log({ textInfoSubmit });
   const classContainer = `complete__button-container ${
     isProfile ? "complete__button-container_type_profile" : ""
   }`;
@@ -25,6 +24,7 @@ const CompleteButton = ({
   const classLink = `link complete__link ${
     isProfile ? "complete__link_type_profile" : ""
   }`;
+
   const linkTextUrl = isProfile ? (
     <a onClick={onSignOut} className={classLink}>
       {textLink}
@@ -36,16 +36,18 @@ const CompleteButton = ({
   );
 
   return (
-    <div className={classContainer}>
-      <span className="complete__button-error">{textInfoSubmit}</span>
-      <button className={classButton} disabled={!isValid} type="submit">
-        {textButton}
-      </button>
-      <p className={classText}>
-        {textPreLink}
-        {linkTextUrl}
-      </p>
-    </div>
+    <>
+      <div className={classContainer}>
+        <span className="complete__button-error">{textInfoSubmit}</span>
+        <button className={classButton} disabled={!isValid} type="submit">
+          {textButton}
+        </button>
+        <p className={classText}>
+          {textPreLink}
+          {linkTextUrl}
+        </p>
+      </div>
+    </>
   );
 };
 

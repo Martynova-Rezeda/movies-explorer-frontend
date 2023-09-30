@@ -5,7 +5,7 @@ import { shortFilterMovies } from "../../utils/filter";
 const RepresentMovies = ({
   movies,
   saveMovies,
-  isLoading,
+  onLoading,
   isChecked,
   likeMovies,
   disLikeMovies,
@@ -31,7 +31,7 @@ const RepresentMovies = ({
 
   return (
     <>
-      {!isLoading
+      {!onLoading
         ? representMovies.length === 0
           ? notFoundMovies
           : representMovies

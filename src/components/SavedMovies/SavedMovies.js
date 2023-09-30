@@ -10,7 +10,7 @@ import RepresentMovies from "../RepresentMovies/RepresentMovies";
 import Footer from "../Footer/Footer";
 import { filterMovies } from "../../utils/filter";
 
-function SavedMovies({ movies, onInputSearchError, isLoading, disLikeMovies }) {
+function SavedMovies({ movies, onInputSearchError, onLoading, disLikeMovies }) {
   const currentUser = useContext(CurrentUserContext);
   const [isChecked, setIsChecked] = useState(false);
   const [foundMovies, setFoundMovies] = useState([]);
@@ -36,11 +36,11 @@ function SavedMovies({ movies, onInputSearchError, isLoading, disLikeMovies }) {
         onInputSearchError={onInputSearchError}
         handleInputChecked={handleInputChecked}
       />
-      {isLoading ? <Preloader /> : ""}
+      {onLoading ? <Preloader /> : ""}
       <MoviesCardList>
         <RepresentMovies
           movies={foundMovies}
-          isLoading={isLoading}
+          onLoading={onLoading}
           isChecked={isChecked}
           disLikeMovies={disLikeMovies}
         />

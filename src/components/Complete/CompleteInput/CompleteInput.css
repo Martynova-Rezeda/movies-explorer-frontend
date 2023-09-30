@@ -2,6 +2,7 @@
   display: grid;
   grid-area: auth-inputs;
   padding-bottom: 30px;
+  row-gap: 10px;
 }
 
 .complete__input-container {

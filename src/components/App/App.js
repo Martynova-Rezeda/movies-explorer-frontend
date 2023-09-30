@@ -26,8 +26,12 @@ function App() {
     _id: "",
   });
 
-  //Состояния фильмов пользователя
+  //Состояния загрузки
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingLogin, setIsLoadingLogin] = useState(false);
+  const [isLoadingRegister, setIsLoadingRegister] = useState(false);
+  const [isLoadingProfile, setIsLoadingProfile] = useState(false);
+  //Состояния фильмов пользователя
   const [movies, setMovies] = useState([]);
   const [saveMovies, setSaveMovies] = useState([]);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
@@ -121,6 +125,7 @@ function App() {
   };
   //Обновляем данные пользователя
   const onUpdateUserProfile = ({ email, name }) => {
+    setIsLoadingProfile(true);
     return mainApi
       .updateUserProfile({ email, name })
       .then((data) => {
@@ -136,11 +141,15 @@ function App() {
         res.then((error) => {
           setErrorMessage(error.message);
         });
+      })
+      .finally(() => {
+        setIsLoadingProfile(false);
       });
   };
 
   // обработчик авторизации пользователя
   const handleLoginSubmit = ({ email, password }) => {
+    setIsLoadingLogin(true);
     return mainApi
       .login({ email, password })
       .then((data) => {
@@ -153,11 +162,15 @@ function App() {
         res.then((error) => {
           setErrorMessage(error.message);
         });
+      })
+      .finally(() => {
+        setIsLoadingLogin(false);
       });
   };
 
   //Обработчик регистрации пользователя
   const handleRegistationSubmit = ({ name, email, password }) => {
+    setIsLoadingRegister(true);
     return mainApi
       .register({ name, email, password })
       .then(() => {
@@ -173,6 +186,9 @@ function App() {
             console.log(error.message);
           }
         });
+      })
+      .finally(() => {
+        setIsLoadingRegister(false);
       });
   };
   //Обработка выхода пользователя
@@ -248,7 +264,7 @@ function App() {
             element={
               <ProtectedRoute
                 element={Movies}
-                isLoading={isLoading}
+                onLoading={isLoading}
                 onInputSearchError={onInputSearchError}
                 isLoggedIn={currentUser.isLoggedIn}
                 isTokenChecked={isTokenChecked}
@@ -268,7 +284,7 @@ function App() {
                 movies={saveMovies}
                 onInputSearchError={onInputSearchError}
                 isTokenChecked={isTokenChecked}
-                isLoading={isLoading}
+                onLoading={isLoading}
                 disLikeMovies={deleteMovies}
               />
             }
@@ -279,6 +295,7 @@ function App() {
               <Register
                 onRegistationSubmit={handleRegistationSubmit}
                 errorMessage={errorMessage}
+                onLoading={isLoadingRegister}
               />
             }
           />
@@ -288,6 +305,7 @@ function App() {
               <Login
                 onLoginSubmit={handleLoginSubmit}
                 errorMessage={errorMessage}
+                onLoading={isLoadingLogin}
               />
             }
           />
@@ -301,6 +319,7 @@ function App() {
                 onSignOut={handleLogOutSubmit}
                 errorMessage={errorMessage}
                 onUpdateUserProfile={onUpdateUserProfile}
+                onLoading={isLoadingProfile}
               />
             }
           />

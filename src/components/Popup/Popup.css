@@ -46,7 +46,7 @@
 .popup__info-container {
   display: flex;
   flex-direction: column;
-  padding-top: 60px;
+  padding-top: 10px;
 }
 
 .popup__message {
@@ -98,7 +98,7 @@
 
 @media screen and (max-width: 550px) and (min-width: 320px) {
   .popup__message {
-    margin-top: 60px;
+    margin-top: 10px;
   }
 }
 
@@ -113,5 +113,11 @@
   .popup__button-close {
     right: 0;
     top: -35px;
+  }
+}
+
+@media screen and (max-width: 550px) and (min-width: 320px) {
+  .popup__message {
+    font-size: 15px;
   }
 }

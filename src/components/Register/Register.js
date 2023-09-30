@@ -6,7 +6,7 @@ import CompleteInput from "../Complete/CompleteInput/CompleteInput";
 import CompleteButton from "../Complete/CompleteButton/CompleteButton";
 import "../Complete/Complete.css";
 
-const Register = ({ onRegistationSubmit, isLoading, errorMessage }) => {
+const Register = ({ onRegistationSubmit, onLoading, errorMessage }) => {
   const form = useFormWithValidation();
 
   const handleSubmit = (evt) => {
@@ -43,7 +43,7 @@ const Register = ({ onRegistationSubmit, isLoading, errorMessage }) => {
               maxLength="30"
               onChange={form.handleChange}
               errors={form.errors}
-              isDisabled={isLoading}
+              isDisabled={onLoading}
             />
             <CompleteInput
               name="email"
@@ -52,7 +52,7 @@ const Register = ({ onRegistationSubmit, isLoading, errorMessage }) => {
               type="email"
               pattern={REGEX_EMAIL}
               errors={form.errors}
-              isDisabled={isLoading}
+              isDisabled={onLoading}
               onChange={form.handleChange}
             />
             <CompleteInput
@@ -61,19 +61,20 @@ const Register = ({ onRegistationSubmit, isLoading, errorMessage }) => {
               id="password"
               type="password"
               errors={form.errors}
-              isDisabled={isLoading}
+              isDisabled={onLoading}
               onChange={form.handleChange}
             />
           </div>
           <CompleteButton
-            textButton={`${
-              isLoading ? "Идет регистрация..." : "Зарегистрироваться"
-            }`}
+            textButton={
+              onLoading ? "Идет регистрация..." : "Зарегистрироваться"
+            }
             textPreLink="Уже зарегистрированы? "
             textLink="Войти"
-            isValid={form.isValid && !isLoading}
+            isValid={form.isValid && !onLoading}
             textInfoSubmit={errorMessage}
             urlLinkSubmit="/signin"
+            isRegister={true}
           />
         </form>
       </div>
