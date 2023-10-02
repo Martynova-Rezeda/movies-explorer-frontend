@@ -1,3 +1,5 @@
+import { MOVIE_DURATION } from "./constants";
+
 //Фильтруем  все фильмы
 const filterMovies = (movies, keyWord) => {
   const word = keyWord.toLowerCase().trim();
@@ -13,7 +15,7 @@ const filterMovies = (movies, keyWord) => {
 //Фильтруем фильмы по продолжительности
 const shortFilterMovies = (movies, isChecked) => {
   if (isChecked) {
-    return movies.filter((movie) => movie.duration <= 40);
+    return movies.filter((movie) => movie.duration <= MOVIE_DURATION);
   } else {
     return movies;
   }
