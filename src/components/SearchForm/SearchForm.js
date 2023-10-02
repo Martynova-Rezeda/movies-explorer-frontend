@@ -38,7 +38,7 @@ function SearchForm({
           name="name"
           type="text"
           placeholder="Фильм"
-          defaultValue={(initialName = "")}
+          defaultValue={initialName}
           required
           onChange={searchInput.onChange}
         />
