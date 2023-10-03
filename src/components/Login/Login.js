@@ -36,10 +36,10 @@ const Login = ({ onLoginSubmit, onLoading, errorMessage }) => {
               id="email"
               nameText="E-mail"
               type="email"
-              pattern={REGEX_EMAIL}
               errors={form.errors}
               isDisabled={onLoading}
               onChange={form.handleChange}
+              pattern={REGEX_EMAIL}
             />
             <CompleteInput
               name="password"

@@ -71,9 +71,9 @@ const Profile = ({
               onChange={form.handleChange}
               value={currentUser.email}
               isDisabled={onLoading}
-              pattern={REGEX_EMAIL}
               errors={form.errors}
               isProfile={true}
+              pattern={REGEX_EMAIL}
             />
           </div>
           <CompleteButton

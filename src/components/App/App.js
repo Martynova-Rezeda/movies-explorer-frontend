@@ -95,7 +95,9 @@ function App() {
   const addMovies = (movie) => {
     return mainApi
       .addMovies({ ...movie })
-      .then(() => getSavedMovies())
+      .then((newMovie) => {
+        setSaveMovies([...saveMovies, newMovie]);
+      })
       .catch((error) => {
         console.log(`Error:${error}`);
       });
@@ -105,7 +107,10 @@ function App() {
   const deleteMovies = (movie) => {
     return mainApi
       .deleteMovies(movie)
-      .then(() => getSavedMovies())
+      .then(() => {
+        setSaveMovies((movies) =>
+          movies.filter((item) => item._id !== movie._id)
+        )})
       .catch((error) => {
         console.log(`Error:${error}`);
       });
