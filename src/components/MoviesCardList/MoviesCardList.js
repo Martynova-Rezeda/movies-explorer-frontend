@@ -3,9 +3,9 @@ import "./MoviesCardList.css";
 
 function MoviesCardList({ children }) {
   return (
-    <section className="movies-list">
-      <div className="movies-list__elements">{children}</div>
-    </section>
+    <ul className="movies-list">
+      {children}
+    </ul>
   );
 }
 export default MoviesCardList;

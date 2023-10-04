@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from "react";
 import "./Profile.css";
 import "../Complete/Complete.css";
 import { useFormWithValidation } from "../../hooks/useForm";
-import { REGEX_EMAIL } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import Header from "../Header/Header";
 import CompleteTitle from "../Complete/CompleteTitle/CompleteTitle";
@@ -73,11 +72,11 @@ const Profile = ({
               isDisabled={onLoading}
               errors={form.errors}
               isProfile={true}
-              pattern={REGEX_EMAIL}
+              pattern="[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}"
             />
           </div>
           <CompleteButton
-            textButton={onLoading ? "Сохранение..." : "Редактировать"}
+            textButton={`${onLoading ? "Сохранение..." : "Редактировать"}`}
             textPreLink=""
             textLink="Выйти из аккаунта"
             isProfile={true}

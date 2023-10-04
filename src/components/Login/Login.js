@@ -2,7 +2,6 @@ import React from "react";
 import logoPath from "../../images/logo.svg";
 import "./Login.css";
 import { useFormWithValidation } from "../../hooks/useForm";
-import { REGEX_EMAIL } from "../../utils/constants";
 import CompleteTitle from "../Complete/CompleteTitle/CompleteTitle";
 import CompleteInput from "../Complete/CompleteInput/CompleteInput";
 import CompleteButton from "../Complete/CompleteButton/CompleteButton";
@@ -39,7 +38,7 @@ const Login = ({ onLoginSubmit, onLoading, errorMessage }) => {
               errors={form.errors}
               isDisabled={onLoading}
               onChange={form.handleChange}
-              pattern={REGEX_EMAIL}
+              pattern="[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}"
             />
             <CompleteInput
               name="password"

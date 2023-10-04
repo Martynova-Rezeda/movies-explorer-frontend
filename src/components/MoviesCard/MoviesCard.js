@@ -45,7 +45,7 @@ function MoviesCard({ movie, saveMovies, likeMovies, disLikeMovies }) {
 
   return (
     <>
-      <div className="movies-list__element">
+      <li className="movies-list__element">
         <a
           href={trailerLink}
           className="movies-list__element-tailerLink"
@@ -76,7 +76,7 @@ function MoviesCard({ movie, saveMovies, likeMovies, disLikeMovies }) {
             {(duration / 60) | 0}ч {duration % 60}м
           </p>
         </div>
-      </div>
+      </li>
     </>
   );
 }

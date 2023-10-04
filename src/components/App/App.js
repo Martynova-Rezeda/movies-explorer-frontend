@@ -26,6 +26,9 @@ function App() {
     _id: "",
   });
 
+  //Состояние формы регистрации/авторизации/профиля
+  //const [isFormActive, setIsFormActive] = useState(true);
+
   //Состояния загрузки
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingLogin, setIsLoadingLogin] = useState(false);
@@ -301,6 +304,7 @@ function App() {
                 onRegistationSubmit={handleRegistationSubmit}
                 errorMessage={errorMessage}
                 onLoading={isLoadingRegister}
+             
               />
             }
           />
@@ -311,6 +315,7 @@ function App() {
                 onLoginSubmit={handleLoginSubmit}
                 errorMessage={errorMessage}
                 onLoading={isLoadingLogin}
+                
               />
             }
           />

@@ -56,6 +56,7 @@ function Movies({
   return (
     <>
       <Header isLoggedIn={currentUser.isLoggedIn} />
+      <main className='movies'>
       <SearchForm
         onSubmit={handleSearchSubmit}
         isChecked={isChecked}
@@ -80,6 +81,7 @@ function Movies({
       ) : (
         ""
       )}
+      </main>
       <Footer />
     </>
   );

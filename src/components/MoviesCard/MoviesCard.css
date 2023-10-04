@@ -1,7 +1,6 @@
 .movies-list__element {
-  width: 360px;
-  height: 201px;
   position: relative;
+  display: grid;
 }
 
 .movies-list__element:hover .movies-list__saved {
@@ -9,7 +8,7 @@
 }
 
 .movies-list__element-picture {
-  width: 360px;
+  width: 100%;
   min-height: 201px;
   object-fit: cover;
   border-radius: 8px;
