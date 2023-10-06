@@ -13,6 +13,7 @@ import Footer from "../Footer/Footer";
 import useDevice from "../../hooks/useDevice";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 
+
 function Movies({
   movies,
   saveMovies,
@@ -21,6 +22,7 @@ function Movies({
   likeMovies,
   disLikeMovies,
 }) {
+
   const currentUser = useContext(CurrentUserContext);
   const [isChecked, setIsChecked] = useState(false);
   const [initialName, setInitialName] = useState("");
@@ -37,6 +39,7 @@ function Movies({
 
   const handleSearchSubmit = (name) => {
     setInitialName(name);
+    
   };
 
   useEffect(() => {
@@ -51,6 +54,7 @@ function Movies({
   const handleInputChecked = (evt) => {
     setIsChecked(evt.target.checked);
     localStorage.setItem("checkbox", evt.target.checked);
+    
   };
 
   return (

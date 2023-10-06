@@ -1,6 +1,6 @@
 .movies-list__elements-more {
+  width: 240px;
   color: #ffffff;
-  width: 320px;
   height: 36px;
   border-radius: 6px;
   background-color: #202020;
@@ -11,18 +11,14 @@
   text-align: center;
   border: 1px solid #424242;
   margin: 0 auto;
-  margin-top: 79px;
+  margin-top: 50px;
+  margin-bottom: 80px;
   padding: 0;
 }
 
-@media screen and (max-width: 1150px) and (min-width: 750px) {
+
+@media screen and (min-width: 768px) {
   .movies-list__elements-more {
-    margin-top: 50px;
-  }
-}
-@media screen and (max-width: 750px) and (min-width: 320px) {
-  .movies-list__elements-more {
-    width: 240px;
-    margin-top: 50px;
+    width: 320px;
   }
 }

@@ -30,6 +30,7 @@ function SavedMovies({ movies, onInputSearchError, onLoading, disLikeMovies }) {
   return (
     <>
       <Header isLoggedIn={currentUser.isLoggedIn} />
+      <main className='saved-movies'>
       <SearchForm
         onSubmit={handleSearchSubmit}
         isChecked={isChecked}
@@ -45,6 +46,7 @@ function SavedMovies({ movies, onInputSearchError, onLoading, disLikeMovies }) {
           disLikeMovies={disLikeMovies}
         />
       </MoviesCardList>
+      </main>
       <Footer />
     </>
   );

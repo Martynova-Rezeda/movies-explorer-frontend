@@ -16,10 +16,10 @@ function SearchForm({
   const searchInput = useInput({});
   const location = useLocation();
 
-  useEffect(() => {
+ useEffect(() => {
     searchInput.setValue(initialName);
   }, []);
-
+  
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (location.pathname === "/movies")
