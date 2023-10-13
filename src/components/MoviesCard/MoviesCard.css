@@ -96,6 +96,8 @@
   max-width: 52px;
 }
 
+
+
 @media screen and (min-width: 768px){
   .movies-list__element-title {
     font-size: 13px;

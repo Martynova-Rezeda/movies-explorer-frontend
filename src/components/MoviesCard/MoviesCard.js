@@ -8,6 +8,7 @@ import { CurrentUserContext } from "../../context/CurrentUserContext";
 function MoviesCard({ movie, saveMovies, likeMovies, disLikeMovies }) {
   const location = useLocation();
   const currentUser = useContext(CurrentUserContext);
+  const [isLikeMovie, setIsLikeMovie] = useState(false);
   const name = movie.nameRU;
   const duration = movie.duration;
   const urlImage =
@@ -15,9 +16,6 @@ function MoviesCard({ movie, saveMovies, likeMovies, disLikeMovies }) {
       ? `${BASE_IMAGE_URL}${movie.image.url}`
       : movie.image;
   const trailerLink = movie.trailerLink;
-
-  const [isLikeMovie, setIsLikeMovie] = useState(false);
-
   const cardLikeBtnClassName = `movies-list__saved ${
     isLikeMovie ? "movies-list__saved_active" : ""
   }`;
@@ -25,12 +23,12 @@ function MoviesCard({ movie, saveMovies, likeMovies, disLikeMovies }) {
   useEffect(() => {
     if (location.pathname === "/movies") {
       const isOwner = saveMovies.some(
-        (saveMovie) =>
-          saveMovie.movieId === movie.id && saveMovie.owner === currentUser._id
+       (saveMovie) => saveMovie.movieId === movie.id && saveMovie.owner === currentUser._id 
       );
       setIsLikeMovie(isOwner);
     }
-  }, []);
+  }, [currentUser._id, location.pathname, movie.id, saveMovies]);
+  
 
   const handlelikeBtn = () => {
     if (location.pathname === "/movies") {

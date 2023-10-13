@@ -15,7 +15,7 @@ function SavedMovies({ movies, onInputSearchError, onLoading, disLikeMovies }) {
   const [isChecked, setIsChecked] = useState(false);
   const [foundMovies, setFoundMovies] = useState([]);
 
-  const handleSearchSubmit = (name) => {
+  const handleSaveSearchSubmit = (name) => {
     setFoundMovies(filterMovies(movies, name));
   };
 
@@ -32,10 +32,11 @@ function SavedMovies({ movies, onInputSearchError, onLoading, disLikeMovies }) {
       <Header isLoggedIn={currentUser.isLoggedIn} />
       <main className='saved-movies'>
       <SearchForm
-        onSubmit={handleSearchSubmit}
+        handleSaveSearchSubmit={handleSaveSearchSubmit}
         isChecked={isChecked}
         onInputSearchError={onInputSearchError}
         handleInputChecked={handleInputChecked}
+        savedMoviesPage={true}
       />
       {onLoading ? <Preloader /> : ""}
       <MoviesCardList>

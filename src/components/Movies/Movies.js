@@ -1,7 +1,6 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { useEffect } from "react";
-import { filterMovies } from "../../utils/filter";
+import { useState,  useContext } from "react";
+import { filterMovies, shortFilterMovies } from "../../utils/filter";
 import "./Movies.css";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
@@ -12,50 +11,69 @@ import ButtonMoreMovies from "../Button/ButtonMoreMovies";
 import Footer from "../Footer/Footer";
 import useDevice from "../../hooks/useDevice";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-
+import { moviesApi } from "../../utils/MoviesApi";
 
 function Movies({
-  movies,
   saveMovies,
   onInputSearchError,
   onLoading,
   likeMovies,
   disLikeMovies,
+  setIsLoading,
+  errorMoviesPopupOpen
 }) {
 
   const currentUser = useContext(CurrentUserContext);
-  const [isChecked, setIsChecked] = useState(false);
-  const [initialName, setInitialName] = useState("");
-  const [foundMovies, setFoundMovies] = useState([]);
+  const [isChecked, setIsChecked] = useState(localStorage.getItem("checkbox") === 'true');// состояние чекбокса
+  const [initialName, setInitialName] = useState(localStorage.getItem("name") || " "); //состояние строки поиска
+
+  //const foundMovies1 = localStorage.getItem('foundMovies');
+   //console.log(JSON.parse(foundMovies1) || []);
+  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('films')) || [] );//состояние всех фильмов
+  const [foundMovies, setFoundMovies] = useState(JSON.parse(localStorage.getItem('foundMovies')) || []);//состояние найденных фильмов
   const device = useDevice({ movies, isChecked, initialName });
+  
 
-  const initialCheckbox = () => {
-    return (localStorage.getItem("checkbox") || "") === "true";
-  };
 
-  const initialNameValue = () => {
-    return localStorage.getItem("name") || " ";
-  };
+//Функция фильтрации фильмов 
+  function handleSetFilteredMovies (movies, query, isChecked) {
+  const moviesList=filterMovies(movies, query);
+  setFoundMovies(isChecked ? shortFilterMovies(moviesList) : moviesList);
+  localStorage.setItem('foundMovies', JSON.stringify(moviesList));
+  }
 
-  const handleSearchSubmit = (name) => {
-    setInitialName(name);
-    
-  };
 
-  useEffect(() => {
-    setFoundMovies(filterMovies(movies, initialName));
-  }, [movies, initialName]);
+  //Обработчик отправки формы
+  const handleSearchSubmit=(initialName)=>{
+  setIsLoading(true);
+  setInitialName(initialName);
+  localStorage.setItem ("name", initialName);
+  localStorage.setItem("checkbox", JSON.stringify(isChecked));
+  if(!movies.length){
+  moviesApi
+  .getMovies()
+  .then((dataMovies) => {
+  setMovies(dataMovies);
+  console.log(dataMovies);
+  localStorage.setItem('films', JSON.stringify(dataMovies))
+  console.log(localStorage.setItem('films', JSON.stringify(dataMovies)));
+  handleSetFilteredMovies(dataMovies, initialName, isChecked)
+})
+.catch(() => errorMoviesPopupOpen())
+.finally(() => {
+ setIsLoading(false);
+})}else{
+  handleSetFilteredMovies(movies, initialName, isChecked);
+  setIsLoading(false);
+}
+ };
 
-  useEffect(() => {
-    setIsChecked(initialCheckbox());
-    setInitialName(initialNameValue());
-  }, []);
+ //Обработчик чекбокса
+ const handleInputChecked = (evt) => {
+  setIsChecked(evt.target.checked);
+  localStorage.setItem("checkbox", evt.target.checked);
+};
 
-  const handleInputChecked = (evt) => {
-    setIsChecked(evt.target.checked);
-    localStorage.setItem("checkbox", evt.target.checked);
-    
-  };
 
   return (
     <>
@@ -65,8 +83,9 @@ function Movies({
         onSubmit={handleSearchSubmit}
         isChecked={isChecked}
         onInputSearchError={onInputSearchError}
-        initialName={initialNameValue()}
+        initialName={initialName}
         handleInputChecked={handleInputChecked}
+
       />
       {onLoading ? <Preloader /> : ""}
       <MoviesCardList>
@@ -91,3 +110,4 @@ function Movies({
   );
 }
 export default Movies;
+

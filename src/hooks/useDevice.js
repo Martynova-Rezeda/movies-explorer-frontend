@@ -31,7 +31,6 @@ const useDevice = ({ movies, isChecked, initialName }) => {
     }
   }, [windowSize, movies]);
 
-  console.log(DEVICE_PARAMS.desktop.maxSize);
 
   useEffect(() => {
     const foundMovies = filterMovies(movies, initialName);

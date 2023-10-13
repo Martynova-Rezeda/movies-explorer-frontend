@@ -9,24 +9,29 @@ function SearchForm({
   onSubmit,
   isChecked,
   onInputSearchError,
-  initialName = " ",
+  initialName ,
   handleInputChecked,
+  handleSaveSearchSubmit
 }) {
-  console.log(initialName);
+
   const searchInput = useInput({});
   const location = useLocation();
 
  useEffect(() => {
     searchInput.setValue(initialName);
-  }, []);
+  }, [initialName]);
   
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (location.pathname === "/movies")
-      localStorage.setItem("name", searchInput.value);
+    if (location.pathname === "/movies"){
     searchInput.value !== " "
       ? onSubmit(searchInput.value)
       : onInputSearchError();
+    } else{
+        searchInput.value !== " "
+          ? handleSaveSearchSubmit(searchInput.value)
+          : onInputSearchError();
+      }
   };
 
   return (

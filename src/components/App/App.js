@@ -10,7 +10,6 @@ import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import InfoTooltip from "../InfoTooltip/Infotooltip";
-import { moviesApi } from "../../utils/MoviesApi";
 import { mainApi } from "../../utils/MainApi";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { filterMovies } from "../../utils/filter";
@@ -26,8 +25,6 @@ function App() {
     _id: "",
   });
 
-  //Состояние формы регистрации/авторизации/профиля
-  //const [isFormActive, setIsFormActive] = useState(true);
 
   //Состояния загрузки
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +32,6 @@ function App() {
   const [isLoadingRegister, setIsLoadingRegister] = useState(false);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
   //Состояния фильмов пользователя
-  const [movies, setMovies] = useState([]);
   const [saveMovies, setSaveMovies] = useState([]);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
 
@@ -53,7 +49,7 @@ function App() {
     if (isTokenChecked && currentUser.isLoggedIn) {
       routesLogined.includes(location.pathname) &&
         navigate("/movies", { replace: true });
-      getMovies();
+//getMovies();
       getSavedMovies();
     }
   }, [isTokenChecked, currentUser.isLoggedIn]);
@@ -68,18 +64,6 @@ function App() {
     }
   }, [currentUser.isLoggedIn]);
 
-  const getMovies = (name = "") => {
-    setIsLoading(true);
-    moviesApi
-      .getMovies()
-      .then((dataMovies) => {
-        setMovies([...filterMovies(dataMovies, name)]);
-      })
-      .catch(() => errorMoviesPopupOpen())
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
 
   const getSavedMovies = (name = "") => {
     return mainApi
@@ -202,8 +186,10 @@ function App() {
   //Обработка выхода пользователя
   const handleLogOutSubmit = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("name");
     localStorage.removeItem("checkbox");
+    localStorage.removeItem('name');
+    localStorage.removeItem('films');
+    localStorage.removeItem('foundMovies');
     setIsTokenChecked(false);
     setCurrentUser({ name: "", isLoggedIn: false, email: "", _id: "" });
     navigate("/", { replace: true });
@@ -276,11 +262,11 @@ function App() {
                 onInputSearchError={onInputSearchError}
                 isLoggedIn={currentUser.isLoggedIn}
                 isTokenChecked={isTokenChecked}
-                movies={movies}
                 saveMovies={saveMovies}
                 likeMovies={addMovies}
                 disLikeMovies={deleteMovies}
-              />
+                setIsLoading={setIsLoading}
+                errorMoviesPopupOpen={errorMoviesPopupOpen}     />
             }
           />
           <Route
