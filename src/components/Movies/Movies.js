@@ -44,6 +44,7 @@ function Movies({
      setInitialName(initialName);
      localStorage.setItem ("name", initialName);
      localStorage.setItem("checkbox", JSON.stringify(isChecked));
+     device.resetMore()
        if(!movies.length){
      moviesApi
      .getMovies()
