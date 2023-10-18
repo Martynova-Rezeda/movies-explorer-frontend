@@ -3,7 +3,7 @@ import { useState } from "react";
 const useInput = ({ inputValue = "" }) => {
   const [value, setValue] = useState(inputValue);
   const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(" ");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const reset = () => {
     setValue(inputValue);

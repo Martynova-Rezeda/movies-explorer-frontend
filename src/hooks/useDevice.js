@@ -2,15 +2,20 @@ import { useEffect, useState } from "react";
 import { DEVICE_PARAMS } from "../utils/constants";
 import { filterMovies, shortFilterMovies } from "../utils/filter";
 
+
+
 const useDevice = ({ movies, isChecked, initialName }) => {
-  const [windowSize, setWindowsSize] = useState(window.screen.width);
+  const [windowSize, setWindowsSize] = useState(window.innerWidth);
   const [numberMovies, setNumberMovies] = useState(0);
   const [isBtnMoreEnabled, setIsBtnMoreEnabled] = useState(false);
 
-  const handleWindowSize = () => {
-    setWindowsSize(window.screen.width);
-  };
 
+  const handleWindowSize = () => {
+      setWindowsSize(window.innerWidth)}
+  
+
+
+  //прослушиватели событий изменения размеров окна
   useEffect(() => {
     window.addEventListener("resize", handleWindowSize);
     return () => {
@@ -18,20 +23,24 @@ const useDevice = ({ movies, isChecked, initialName }) => {
     };
   }, []);
 
+
+  //Меняем состояние количества  отрисованных фильмов при определенном разрешении экрана
   useEffect(() => {
-    if (windowSize >= DEVICE_PARAMS.desktop.maxSize) {
+    if (windowSize <= DEVICE_PARAMS.desktop.maxSize && 
+      windowSize >= DEVICE_PARAMS.desktop.minSize) {
       setNumberMovies(DEVICE_PARAMS.desktop.maxMovies);
     } else if (
-      windowSize < DEVICE_PARAMS.desktop.maxSize &&
-      windowSize >= DEVICE_PARAMS.pad.maxSize
+      windowSize <= DEVICE_PARAMS.desktop.minSize&&
+      windowSize > DEVICE_PARAMS.pad.maxSize
     ) {
       setNumberMovies(DEVICE_PARAMS.pad.maxMovies);
     } else {
       setNumberMovies(DEVICE_PARAMS.mobile.maxMovies);
     }
+    
   }, [windowSize, movies]);
 
-
+//Меняем состояние кнопки (есть/нет) на странице 
   useEffect(() => {
     const foundMovies = filterMovies(movies, initialName);
     const filterIsCheckedMovies = shortFilterMovies(foundMovies, isChecked);
@@ -40,11 +49,13 @@ const useDevice = ({ movies, isChecked, initialName }) => {
       : setIsBtnMoreEnabled(false);
   }, [numberMovies, movies, isChecked, initialName]);
 
+
+//Функция клика по кнопке еще
   const handleBtnMore = () => {
-    if (windowSize >= DEVICE_PARAMS.desktop.maxSize) {
+    if (windowSize <= DEVICE_PARAMS.desktop.maxSize && windowSize >= DEVICE_PARAMS.desktop.minSize) {
       setNumberMovies(numberMovies + DEVICE_PARAMS.desktop.moreMovies);
     } else if (
-      windowSize < DEVICE_PARAMS.desktop.maxSize &&
+      windowSize < DEVICE_PARAMS.desktop.minSize &&
       windowSize >= DEVICE_PARAMS.pad.maxSize
     ) {
       setNumberMovies(numberMovies + DEVICE_PARAMS.pad.moreMovies);
@@ -53,7 +64,7 @@ const useDevice = ({ movies, isChecked, initialName }) => {
     }
   };
 
-  return { numberMovies, isBtnMoreEnabled, handleBtnMore };
+  return { numberMovies, setNumberMovies, isBtnMoreEnabled, handleBtnMore};
 };
 
 export default useDevice;

@@ -2,6 +2,7 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { shortFilterMovies } from "../../utils/filter";
 
+
 const RepresentMovies = ({
   movies,
   saveMovies,
@@ -14,6 +15,8 @@ const RepresentMovies = ({
   const notFoundMovies = (
     <h2 className="movies-list-title">Ничего не найдено</h2>
   );
+
+
 
   const representMovies = shortFilterMovies(movies, isChecked)
     .slice(0, numberMovies)

@@ -11,7 +11,8 @@ function SearchForm({
   onInputSearchError,
   initialName ,
   handleInputChecked,
-  handleSaveSearchSubmit
+  handleSaveSearchSubmit,
+  handleInputCheckedToggle
 }) {
 
   const searchInput = useInput({});
@@ -21,18 +22,30 @@ function SearchForm({
     searchInput.setValue(initialName);
   }, [initialName]);
   
+  
   const handleSubmit = (evt) => {
-    evt.preventDefault();
+     evt.preventDefault();
+     if (location.pathname === "/movies"){
+     searchInput.value !== ""
+       ? onSubmit(searchInput.value)
+       : onInputSearchError();
+     } else {
+     handleSaveSearchSubmit(searchInput.value)
+    }
+   };
+
+
+  const handleToggle = (evt) => {
     if (location.pathname === "/movies"){
-    searchInput.value !== " "
-      ? onSubmit(searchInput.value)
-      : onInputSearchError();
-    } else{
-        searchInput.value !== " "
-          ? handleSaveSearchSubmit(searchInput.value)
-          : onInputSearchError();
-      }
-  };
+   searchInput.value !== ""
+      ? handleInputChecked(evt.target.checked, searchInput.value)
+      : onInputSearchError(); 
+  }
+    else{
+       handleInputCheckedToggle(evt.target.checked, searchInput.value) 
+    }
+    }
+
 
   return (
     <section className="search-form">
@@ -60,7 +73,7 @@ function SearchForm({
             type="checkbox"
             id="switch"
             checked={isChecked}
-            onChange={handleInputChecked}
+            onChange={handleToggle}
           />
           <span className="search-form__toggle-switch"></span>
           <span className="search-form__movie-toggle-name">
@@ -72,3 +85,5 @@ function SearchForm({
   );
 }
 export default SearchForm;
+
+

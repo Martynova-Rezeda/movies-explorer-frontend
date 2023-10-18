@@ -8,20 +8,26 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import RepresentMovies from "../RepresentMovies/RepresentMovies";
 import Footer from "../Footer/Footer";
-import { filterMovies } from "../../utils/filter";
+import {filterSearchShortMovies} from "../../utils/filter";
 
 function SavedMovies({ movies, onInputSearchError, onLoading, disLikeMovies }) {
   const currentUser = useContext(CurrentUserContext);
   const [isChecked, setIsChecked] = useState(false);
   const [foundMovies, setFoundMovies] = useState([]);
+ 
 
-  const handleSaveSearchSubmit = (name) => {
-    setFoundMovies(filterMovies(movies, name));
+
+  const handleSaveSearchSubmit = (name='') => {
+    setFoundMovies(filterSearchShortMovies(movies, name));
   };
 
-  const handleInputChecked = (evt) => {
-    setIsChecked(evt.target.checked);
-  };
+  
+  const handleInputCheckedToggle = (isChecked, query='') => {
+    const arr = filterSearchShortMovies(movies, query, isChecked);
+    setFoundMovies(arr);
+    setIsChecked(isChecked)
+   };
+
 
   useEffect(() => {
     setFoundMovies(movies);
@@ -35,7 +41,7 @@ function SavedMovies({ movies, onInputSearchError, onLoading, disLikeMovies }) {
         handleSaveSearchSubmit={handleSaveSearchSubmit}
         isChecked={isChecked}
         onInputSearchError={onInputSearchError}
-        handleInputChecked={handleInputChecked}
+        handleInputCheckedToggle={handleInputCheckedToggle}
         savedMoviesPage={true}
       />
       {onLoading ? <Preloader /> : ""}

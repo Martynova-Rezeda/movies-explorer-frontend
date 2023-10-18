@@ -49,7 +49,6 @@ function App() {
     if (isTokenChecked && currentUser.isLoggedIn) {
       routesLogined.includes(location.pathname) &&
         navigate("/movies", { replace: true });
-//getMovies();
       getSavedMovies();
     }
   }, [isTokenChecked, currentUser.isLoggedIn]);
@@ -77,6 +76,8 @@ function App() {
         });
       });
   };
+
+
 
   //Добавляем фильмы в сохраненные
   const addMovies = (movie) => {

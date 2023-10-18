@@ -9,13 +9,15 @@ const DEVICE_PARAMS = {
   desktop: {
     maxMovies: 12,
     moreMovies: 3,
-    maxSize: 1280,
+    maxSize: 2560,
+    minSize: 901
   },
 
   pad: {
     maxMovies: 8,
     moreMovies: 2,
-    maxSize: 768,
+    maxSize: 767,
+    minSize: 480
   },
 
   mobile: {

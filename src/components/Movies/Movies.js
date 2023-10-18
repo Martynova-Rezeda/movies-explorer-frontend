@@ -1,6 +1,6 @@
 import React from "react";
 import { useState,  useContext } from "react";
-import { filterMovies, shortFilterMovies } from "../../utils/filter";
+import { filterSearchShortMovies } from "../../utils/filter";
 import "./Movies.css";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
@@ -25,54 +25,72 @@ function Movies({
 
   const currentUser = useContext(CurrentUserContext);
   const [isChecked, setIsChecked] = useState(localStorage.getItem("checkbox") === 'true');// состояние чекбокса
-  const [initialName, setInitialName] = useState(localStorage.getItem("name") || " "); //состояние строки поиска
-
-  //const foundMovies1 = localStorage.getItem('foundMovies');
-   //console.log(JSON.parse(foundMovies1) || []);
+  const [initialName, setInitialName] = useState(localStorage.getItem("name") || ""); //состояние строки поиска
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('films')) || [] );//состояние всех фильмов
   const [foundMovies, setFoundMovies] = useState(JSON.parse(localStorage.getItem('foundMovies')) || []);//состояние найденных фильмов
   const device = useDevice({ movies, isChecked, initialName });
-  
 
 
-//Функция фильтрации фильмов 
-  function handleSetFilteredMovies (movies, query, isChecked) {
-  const moviesList=filterMovies(movies, query);
-  setFoundMovies(isChecked ? shortFilterMovies(moviesList) : moviesList);
-  localStorage.setItem('foundMovies', JSON.stringify(moviesList));
-  }
+// //Функция фильтрации фильмов 
+    function handleSetFilteredMovies (movies, query, isChecked) {
+   const moviesList = filterSearchShortMovies(movies, query, isChecked);
+   setFoundMovies(moviesList);
+   localStorage.setItem('foundMovies', JSON.stringify(moviesList));
+   }
 
+  // Обработчик отправки формы поиска
+   const handleSearchSubmit=(initialName)=>{
+    setIsLoading(true);
+     setInitialName(initialName);
+     localStorage.setItem ("name", initialName);
+     localStorage.setItem("checkbox", JSON.stringify(isChecked));
+       if(!movies.length){
+     moviesApi
+     .getMovies()
+     .then((dataMovies) => {
+     setMovies(dataMovies);
+     localStorage.setItem('films', JSON.stringify(dataMovies))
+     handleSetFilteredMovies(dataMovies, initialName, isChecked)
+   })
+   .catch(() => errorMoviesPopupOpen())
+   .finally(() => {
+    setIsLoading(false);
+      })}else{
+     handleSetFilteredMovies(movies, initialName, isChecked);
+     setIsLoading(false);
+   }
+    };
 
-  //Обработчик отправки формы
-  const handleSearchSubmit=(initialName)=>{
-  setIsLoading(true);
-  setInitialName(initialName);
-  localStorage.setItem ("name", initialName);
+ //Обработчик чекбокса 
+ const handleInputChecked = (isChecked, initialName) => { 
   localStorage.setItem("checkbox", JSON.stringify(isChecked));
-  if(!movies.length){
-  moviesApi
-  .getMovies()
-  .then((dataMovies) => {
-  setMovies(dataMovies);
-  console.log(dataMovies);
-  localStorage.setItem('films', JSON.stringify(dataMovies))
-  console.log(localStorage.setItem('films', JSON.stringify(dataMovies)));
-  handleSetFilteredMovies(dataMovies, initialName, isChecked)
-})
-.catch(() => errorMoviesPopupOpen())
-.finally(() => {
+  localStorage.setItem("name", initialName);
+ if(!localStorage.getItem ('films')) { //если в базе нет фильмов, то делаем запрос на их получение
+  setIsLoading(true);
+    moviesApi
+    .getMovies()
+    .then((dataMovies) => {
+    setMovies(dataMovies);//меняем стейт с фильмами
+    localStorage.setItem('films', JSON.stringify(dataMovies));//сохраняю в локал все фильмы с базы
+    const list = filterSearchShortMovies(dataMovies, initialName, isChecked);
+    setFoundMovies(list);
+    localStorage.setItem('foundMovies', JSON.stringify(list));
+  })
+    .catch(() => errorMoviesPopupOpen())
+    .finally(() => {
  setIsLoading(false);
-})}else{
-  handleSetFilteredMovies(movies, initialName, isChecked);
+})
+}else{
+  localStorage.setItem("checkbox", JSON.stringify(isChecked));
+  localStorage.setItem("name", initialName);
+  setIsChecked(isChecked);
+  const arr = filterSearchShortMovies(movies, initialName, isChecked);
+  setFoundMovies(arr);
+  localStorage.setItem('foundMovies', JSON.stringify(arr));
   setIsLoading(false);
 }
+setIsChecked(isChecked);
  };
-
- //Обработчик чекбокса
- const handleInputChecked = (evt) => {
-  setIsChecked(evt.target.checked);
-  localStorage.setItem("checkbox", evt.target.checked);
-};
 
 
   return (
@@ -85,7 +103,6 @@ function Movies({
         onInputSearchError={onInputSearchError}
         initialName={initialName}
         handleInputChecked={handleInputChecked}
-
       />
       {onLoading ? <Preloader /> : ""}
       <MoviesCardList>
