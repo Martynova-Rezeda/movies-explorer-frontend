@@ -1,0 +1,123 @@
+.popup {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  opacity: 0;
+  position: fixed;
+  visibility: hidden;
+  width: 100vw;
+}
+
+.popup_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup__container {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 400px;
+  height: 200px;
+}
+
+.popup__button-close {
+  min-height: 32px;
+  min-width: 32px;
+  position: absolute;
+  right: -40px;
+  top: -41px;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../images/Group.svg");
+  transition: opacity 0.6s;
+  cursor: pointer;
+}
+
+.popup__info-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.popup__message {
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 29px;
+  margin: 0 auto;
+  max-width: 358px;
+  min-height: 58px;
+  text-align: center;
+  color: #3456f3;
+}
+
+.popup__button {
+  color: #ffffff;
+  width: 320px;
+  height: 36px;
+  border-radius: 6px;
+  background-color: #3456f3;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0px;
+  text-align: center;
+  border: 1px solid #424242;
+  margin: 60px auto 0;
+  padding: 0;
+}
+
+.popup__button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 2s;
+}
+
+@media screen and (max-width: 550px) and (min-width: 320px) {
+  .popup__container {
+    max-width: 280px;
+    min-height: 200px;
+  }
+}
+@media screen and (max-width: 550px) and (min-width: 320px) {
+  .popup__info-container {
+    max-width: 280px;
+    min-height: 308px;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 550px) and (min-width: 320px) {
+  .popup__message {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 550px) and (min-width: 320px) {
+  .popup__button {
+    max-width: 250px;
+    margin-top: 100px;
+  }
+}
+
+@media screen and (max-width: 550px) and (min-width: 320px) {
+  .popup__button-close {
+    right: 0;
+    top: -35px;
+  }
+}
+
+@media screen and (max-width: 550px) and (min-width: 320px) {
+  .popup__message {
+    font-size: 15px;
+  }
+}

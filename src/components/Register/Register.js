@@ -1,81 +1,81 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import logoPath from "../../images/logo.svg";
-import "./Register.css";
+import { useFormWithValidation } from "../../hooks/useForm";
+import CompleteTitle from "../Complete/CompleteTitle/CompleteTitle";
+import CompleteInput from "../Complete/CompleteInput/CompleteInput";
+import CompleteButton from "../Complete/CompleteButton/CompleteButton";
+import "../Complete/Complete.css";
 
-const Register = () => {
-  const [formValue, setFormValue] = useState({
-    name: "",
-    password: "",
-    email: "",
-  });
+const Register = ({ onRegistationSubmit, onLoading, errorMessage }) => {
+  const form = useFormWithValidation();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValue({ ...formValue, [name]: value });
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    onRegistationSubmit({
+      name: form.values.name,
+      email: form.values.email,
+      password: form.values.password,
+    });
   };
 
   return (
     <>
-      <div className="register">
-        <a href="/" className="link">
-          <img src={logoPath} alt="Логотип сайта" className="logo" />
-        </a>
-        <form className="register__form">
-          <h1 className="register__header">Добро пожаловать!</h1>
-          <label htmlFor="name" className="register__label">
-            Имя
-          </label>
-          <input
-            className="register__field"
-            required
-            minLength={2}
-            maxLength={30}
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Введите имя"
-            value={formValue.name}
-            onChange={handleChange}
-          />
-          <label htmlFor="email" className="register__label">
-            E-mail
-          </label>
-          <input
-            className="register__field"
-            required
-            id="email"
-            name="email"
-            type="email"
-            placeholder=" Введите электронную почту"
-            value={formValue.email}
-            onChange={handleChange}
-          />
-          <label htmlFor="password" className="register__label">
-            Пароль
-          </label>
-          <input
-            className="register__field"
-            required
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Введите пароль"
-            value={formValue.password}
-            onChange={handleChange}
-          />
-          <button type="submit" className="button register__button">
-            Зарегистрироваться
-          </button>
-        </form>
-        <div className="register__signin">
-          <p className="register__signin-title">
-            Уже зарегистрированы?
-            <Link to="/sign-in" className="link register__link">
-              Войти
-            </Link>
-          </p>
+      <div className="complete">
+        <div className="complete__header">
+          <a href="/" className="link">
+            <img
+              src={logoPath}
+              alt="Логотип сайта"
+              className="logo logo__complete"
+            />
+          </a>
         </div>
+        <form className="complete__form" onSubmit={handleSubmit} noValidate>
+          <CompleteTitle title={`Добро пожаловать!`} />
+          <div className="complete__inputs">
+            <CompleteInput
+              name="name"
+              nameText="Имя"
+              id="name"
+              type="text"
+              minLength="2"
+              maxLength="30"
+              onChange={form.handleChange}
+              errors={form.errors}
+              isDisabled={onLoading}
+            />
+            <CompleteInput
+              name="email"
+              id="email"
+              nameText="E-mail"
+              type="email"
+              errors={form.errors}
+              isDisabled={onLoading}
+              onChange={form.handleChange}
+              pattern="[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}"
+            />
+            <CompleteInput
+              name="password"
+              nameText="Пароль"
+              id="password"
+              type="password"
+              errors={form.errors}
+              isDisabled={onLoading}
+              onChange={form.handleChange}
+            />
+          </div>
+          <CompleteButton
+            textButton={
+              onLoading ? "Идет регистрация..." : "Зарегистрироваться"
+            }
+            textPreLink="Уже зарегистрированы? "
+            textLink="Войти"
+            isValid={form.isValid && !onLoading}
+            textInfoSubmit={errorMessage}
+            urlLinkSubmit="/signin"
+            isRegister={true}
+          />
+        </form>
       </div>
     </>
   );
